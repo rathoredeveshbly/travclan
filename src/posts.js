@@ -1,33 +1,51 @@
 import React from "react";
+import { Table } from "react-bootstrap";
+
+const heading = {
+  width: "15%",
+  height: "35",
+  borderRadius: "50%",
+};
 
 const Posts = ({ posts, loading }) => {
   if (loading) {
     return <h1>loading...</h1>;
   }
   return (
-    <div className="container">
-      {posts.map((post) => (
-        <div className="card" key={post.id}>
-          <div className="col-4">
-            <img className="card-img-top mt-1" src={post.avatarUrl} />
-          </div>
-          <div className="col-4">
-            <h2>
-              {post.firstname} {post.lastname}
-            </h2>
-          </div>
-          <div className="col-4 m-1">
-            Max Bid : {post.bids.reduce((a, c) => {
-              if (a.amount > c.amount) {
-                return a.amount;
-              } else {
-                return c.amount;
-              }
-            }, 0)}
-           <br/> <button onClick={}>Toggle the Bid</button>
-          </div>
-        </div>
-      ))}
+    <div className="App">
+      <Table>
+        <tbody>
+          <tr>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Phone</td>
+            <td>Premium</td>
+            <td>Max/Min bid</td>
+          </tr>
+          {posts.map((post) => (
+            <tr key={post.id}>
+              <td>
+                <h1>
+                  {post.firstname} {post.lastname}
+                </h1>{" "}
+                <img style={heading} src={post.avatarUrl} />
+              </td>
+              <td>{post.email}</td>
+              <td>{post.phone}</td>
+              <td>{post.hasPremium === true ? "Yes" : "No"}</td>
+              <td>
+                {post.bids.reduce((a, c) => {
+                  if (a.amount > c.amount) {
+                    return a.amount;
+                  } else {
+                    return c.amount;
+                  }
+                }, 0)}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
     </div>
   );
 };
