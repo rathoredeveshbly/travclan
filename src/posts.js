@@ -5,14 +5,29 @@ const Posts = ({ posts, loading }) => {
     return <h1>loading...</h1>;
   }
   return (
-    <ul className="list-group">
-      {posts.map(post => (
-        <li className="list-group-item" key={post.id}>
-          {post.firstname}
-          {post.lastname}
-        </li>
+    <div className="container">
+      {posts.map((post) => (
+        <div className="card" key={post.id}>
+          <div className="col-4">
+            <img className="card-img-top mt-1" src={post.avatarUrl} />
+          </div>
+          <div className="col-4">
+            <h2>
+              {post.firstname} {post.lastname}
+            </h2>
+          </div>
+          <div className="col-4 m-2">
+            Max Bid : {post.bids.reduce((a, c) => {
+              if (a.amount > c.amount) {
+                return a.amount;
+              } else {
+                return c.amount;
+              }
+            }, 0)}
+          </div>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 };
 
