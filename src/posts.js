@@ -16,7 +16,7 @@ const Posts = ({ posts, loading }) => {
               {post.firstname} {post.lastname}
             </h2>
           </div>
-          <div className="col-4 m-2">
+          <div className="col-4 m-1">
             Max Bid : {post.bids.reduce((a, c) => {
               if (a.amount > c.amount) {
                 return a.amount;
@@ -24,6 +24,7 @@ const Posts = ({ posts, loading }) => {
                 return c.amount;
               }
             }, 0)}
+           <br/> <button onClick={}>Toggle the Bid</button>
           </div>
         </div>
       ))}
