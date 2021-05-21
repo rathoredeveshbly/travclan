@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Table } from "react-bootstrap";
 
 const heading = {
@@ -8,6 +8,12 @@ const heading = {
 };
 
 const Posts = ({ posts, loading, toggle }) => {
+  const [selected, setSelected] = useState([]);
+  const handleSelect = (obj) => {
+console.log(obj)
+    setSelected((prevSelected) => [...prevSelected,obj]);
+  };
+console.log(selected)
   if (loading) {
     return <h1>loading...</h1>;
   }
@@ -23,7 +29,7 @@ const Posts = ({ posts, loading, toggle }) => {
             <td>Bid</td>
           </tr>
           {posts.map((post) => (
-            <tr key={post.id}>
+            <tr onClick={() => handleSelect(post)} key={post.id}>
               <td>
                 <h1>
                   {post.firstname} {post.lastname}
@@ -34,9 +40,17 @@ const Posts = ({ posts, loading, toggle }) => {
               <td>{post.phone}</td>
               <td>{post.hasPremium === true ? "Yes" : "No"}</td>
               <td>
-                {toggle === true
-                  ?<div>Max : {post.bids.sort((a, b) => b.amount - a.amount)[0].amount}</div>
-                  : <div>Min : {post.bids.sort((a, b) => a.amount - b.amount)[0].amount}</div>}
+                {toggle === true ? (
+                  <div>
+                    Max :{" "}
+                    {post.bids.sort((a, b) => b.amount - a.amount)[0].amount}
+                  </div>
+                ) : (
+                  <div>
+                    Min :{" "}
+                    {post.bids.sort((a, b) => a.amount - b.amount)[0].amount}
+                  </div>
+                )}
               </td>
             </tr>
           ))}

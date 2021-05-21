@@ -35,7 +35,7 @@ function App() {
 
   return (
     <div className="container m-3">
-      <p>TravClan</p>
+      <h3>TravClan</h3>
       <button className="btn btn-primary" onClick={()=>setToggle(false)}>Toggle Bids</button>
       <Posts posts={currentPosts} loading={loading} toggle={toggle}/>
       <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} />
