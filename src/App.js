@@ -9,6 +9,9 @@ function App() {
   const [loading, setloading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(3);
+  const [toggle, setToggle] = useState(true);
+
+
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -28,11 +31,13 @@ function App() {
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = pageNumber => setCurrentPage(pageNumber);
+  console.log(toggle);
 
   return (
     <div className="container m-3">
-      <h1>TravClan</h1>
-      <Posts posts={currentPosts} loading={loading} />
+      <p>TravClan</p>
+      <button className="btn btn-primary" onClick={()=>setToggle(false)}>Toggle Bids</button>
+      <Posts posts={currentPosts} loading={loading} toggle={toggle}/>
       <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} />
     </div>
   );

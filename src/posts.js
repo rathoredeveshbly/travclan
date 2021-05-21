@@ -7,7 +7,7 @@ const heading = {
   borderRadius: "50%",
 };
 
-const Posts = ({ posts, loading }) => {
+const Posts = ({ posts, loading, toggle }) => {
   if (loading) {
     return <h1>loading...</h1>;
   }
@@ -20,7 +20,7 @@ const Posts = ({ posts, loading }) => {
             <td>Email</td>
             <td>Phone</td>
             <td>Premium</td>
-            <td>Max/Min bid</td>
+            <td>Bid</td>
           </tr>
           {posts.map((post) => (
             <tr key={post.id}>
@@ -34,13 +34,9 @@ const Posts = ({ posts, loading }) => {
               <td>{post.phone}</td>
               <td>{post.hasPremium === true ? "Yes" : "No"}</td>
               <td>
-                {post.bids.reduce((a, c) => {
-                  if (a.amount > c.amount) {
-                    return a.amount;
-                  } else {
-                    return c.amount;
-                  }
-                }, 0)}
+                {toggle === true
+                  ?<div>Max : {post.bids.sort((a, b) => b.amount - a.amount)[0].amount}</div>
+                  : <div>Min : {post.bids.sort((a, b) => a.amount - b.amount)[0].amount}</div>}
               </td>
             </tr>
           ))}
