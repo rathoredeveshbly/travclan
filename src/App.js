@@ -3,6 +3,7 @@ import "./App.css";
 import axios from "axios";
 import Posts from "./posts";
 import Pagination from "./pagination";
+import BidData from './bidData';
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -11,7 +12,12 @@ function App() {
   const [postsPerPage] = useState(3);
   const [toggle, setToggle] = useState(true);
 
-
+  const [selected, setSelected] = useState([]);
+  const handleSelect = (obj) => {
+console.log(obj)
+    setSelected((prevSelected) => [...prevSelected,obj]);
+  };
+console.log(selected)
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -37,8 +43,9 @@ function App() {
     <div className="container m-3">
       <h3>TravClan</h3>
       <button className="btn btn-primary" onClick={()=>setToggle(false)}>Toggle Bids</button>
-      <Posts posts={currentPosts} loading={loading} toggle={toggle}/>
+      <Posts posts={currentPosts} loading={loading} toggle={toggle} handleSelect={handleSelect}/>
       <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} />
+      <BidData selected={selected} />
     </div>
   );
 }

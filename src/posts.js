@@ -7,13 +7,8 @@ const heading = {
   borderRadius: "50%",
 };
 
-const Posts = ({ posts, loading, toggle }) => {
-  const [selected, setSelected] = useState([]);
-  const handleSelect = (obj) => {
-console.log(obj)
-    setSelected((prevSelected) => [...prevSelected,obj]);
-  };
-console.log(selected)
+const Posts = ({ posts, loading, toggle, handleSelect }) => {
+  
   if (loading) {
     return <h1>loading...</h1>;
   }
